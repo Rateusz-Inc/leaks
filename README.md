@@ -1,2 +1,2 @@
-# leaks
-Source codes of shitty plugins/mods from skids
+# Leaks
+Here will appear folders dedicated to plugins or mods from skid devs :3
