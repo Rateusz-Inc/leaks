@@ -1,0 +1,13 @@
+name: TimedcodePowitania
+main: timedcode.timedcodePowitania.TimedcodePowitania
+version: 1.0
+api-version: 1.20
+commands:
+  powitania:
+    description: Komenda do zarządzania powitaniami
+    usage: /powitania reload
+    permission: powitania.reload
+permissions:
+  timedcode.powitania.reload:
+    description: Pozwala na przeładowanie konfiguracji powitań
+    default: op

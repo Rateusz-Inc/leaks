@@ -1,0 +1,20 @@
+name: TimedCodeVanish
+main: timedcode.timedcodeVanish.VanishPlugin
+version: 1.2
+api-version: 1.16
+author: mxddudi
+commands:
+  vanish:
+    description: Ukrywa lub pokazuje gracza.
+    permission: timedcode.vanish
+  vanishspeed:
+    description: Zmienia prędkość poruszania w vanish (Tylko premium).
+    permission: timedcode.premium
+  vanishfly:
+    description: Włącza/wyłącza latanie w vanish (Tylko premium).
+    permission: timedcode.premium
+permissions:
+  timedcode.vanish:
+    default: op
+  timedcode.premium:
+    default: op

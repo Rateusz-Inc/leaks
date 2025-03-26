@@ -1,0 +1,34 @@
+# 🔒 LICENCJA
+license-key: "FREE"  # "FREE" dla darmowej wersji, klucz premium dla rozszerzonej funkcjonalności
+
+# 🌍 JĘZYK
+language: "pl"  # Możliwe wartości: "pl" (Polski), "en" (Angielski)
+
+# 🛠️ USTAWIENIA VANISH
+vanish:
+  auto-vanish: false  # Automatyczne znikanie po wejściu na serwer
+  vanish-mode: "SPECTATOR"  # Tryb vanish: "SPECTATOR" lub "SURVIVAL"
+  silent-join: true  # Ukrywanie powiadomień o dołączeniu do gry
+  silent-quit: true  # Ukrywanie powiadomień o opuszczeniu gry
+  show-message-to-ops: true  # Czy administratorzy widzą powiadomienia vanish?
+
+# ⭐ OPCJE PREMIUM
+premium:
+  enable-vanish-fly: true  # Możliwość latania w vanish (Premium)
+  enable-vanish-speed: true  # Możliwość zmiany prędkości w vanish (Premium)
+  heal-on-vanish: true  # Leczenie gracza po wejściu w vanish (Premium)
+  max-speed: 10  # Maksymalna prędkość w vanish (1-10)
+
+# ✉️ WIADOMOŚCI
+messages:
+  vanish-enabled: "&eJesteś teraz niewidzialny!"
+  vanish-disabled: "&aJesteś teraz widoczny!"
+  no-permission: "&cNie masz uprawnień do użycia tej komendy!"
+  only-players: "&cTylko gracze mogą używać tej komendy!"
+  join-message: "&7{PLAYER} dołączył do gry."
+  quit-message: "&7{PLAYER} opuścił grę."
+  vanish-fly-on: "&bLatanie w vanish WŁĄCZONE!"
+  vanish-fly-off: "&cLatanie w vanish WYŁĄCZONE!"
+  vanish-speed-set: "&bPrędkość w vanish ustawiona na: {SPEED}"
+  vanish-speed-invalid: "&cNieprawidłowa wartość! Wpisz liczbę od 1 do {MAX_SPEED}."
+  premium-benefits: "&6Korzystasz z wersji Premium! Miłej gry!"

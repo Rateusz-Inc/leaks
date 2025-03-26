@@ -1,0 +1,9 @@
+# Konfiguracja pluginu Powitania
+
+messages:
+  join: "&aWitaj &e%player% &ana serwerze!"
+  quit: "&c%player% &copuścił serwer. Do zobaczenia!"
+
+settings:
+  log-joins: true  # Czy logować wejścia graczy w konsoli
+  log-quits: true  # Czy logować wyjścia graczy w konsoli
