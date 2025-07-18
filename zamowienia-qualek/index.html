@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIOBYWAT3EL GENERATOR</title>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #000000 0%, #1a0033 50%, #000000 100%);
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(147, 112, 219, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(75, 0, 130, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #111111 0%, #1a1a1a 100%);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(138, 43, 226, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .made-by {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 12px;
+            color: #8a2be2;
+            z-index: 100;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2) 0%, rgba(147, 112, 219, 0.2) 100%);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.4),
+                0 4px 15px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: madeByGlow 3s ease-in-out infinite, madeByFloat 4s ease-in-out infinite;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .made-by:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.6),
+                0 8px 25px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3) 0%, rgba(147, 112, 219, 0.3) 100%);
+            animation: madeByGlow 1.5s ease-in-out infinite, madeByFloat 2s ease-in-out infinite;
+        }
+        
+        .made-by:active {
+            transform: scale(0.95) rotate(-1deg);
+            animation: madeByPulse 0.3s ease-in-out;
+        }
+        
+        @keyframes madeByPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(0.95); }
+        }
+        
+        @keyframes madeByGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 20px rgba(138, 43, 226, 0.4),
+                    0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 30px rgba(138, 43, 226, 0.7),
+                    0 8px 25px rgba(0, 0, 0, 0.4);
+            }
+        }
+        
+        @keyframes madeByFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% { 
+                transform: translateY(-2px) rotate(0.5deg);
+            }
+            50% { 
+                transform: translateY(-1px) rotate(-0.5deg);
+            }
+            75% { 
+                transform: translateY(-3px) rotate(0.5deg);
+            }
+        }
+
+        .discord-link {
+            position: absolute;
+            top: 55px;
+            left: 10px;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .discord-link:hover {
+            transform: scale(1.1);
+        }
+
+        .discord-link img {
+            width: 64px;
+            height: 49px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(147, 112, 219, 0.1) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            box-shadow: 0 8px 32px rgba(138, 43, 226, 0.1);
+        }
+        
+        h1 {
+            position: relative;
+            display: block;
+            width: 100%;
+            color: #111;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+        h1::after {
+            content: 'MIOBYWAT3EL GENERATOR';
+            position: absolute;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, #8a2be2 50%, transparent 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            pointer-events: none;
+            animation: titleGradientMove 10s ease-in-out infinite;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+        @keyframes titleGradientMove {
+            0% { background-position: -200% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        #ordersBtn {
+            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            animation: buttonFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes buttonFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        #ordersBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        #ordersBtn:hover::before {
+            left: 100%;
+        }
+        
+        #ordersBtn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+            animation: buttonShake 0.5s ease-in-out;
+        }
+        
+        #ordersBtn:active {
+            transform: translateY(0px) scale(0.95);
+            animation: buttonPress 0.2s ease-in-out;
+        }
+        
+        @keyframes buttonShake {
+            0%, 100% { transform: translateY(-2px) scale(1.05) rotate(0deg); }
+            25% { transform: translateY(-2px) scale(1.05) rotate(-1deg); }
+            75% { transform: translateY(-2px) scale(1.05) rotate(1deg); }
+        }
+        
+        @keyframes buttonPress {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(2px) scale(0.95); }
+            100% { transform: translateY(0px) scale(0.95); }
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #8a2be2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9em;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.05) 0%, rgba(147, 112, 219, 0.05) 100%);
+            color: #fff;
+            backdrop-filter: blur(5px);
+        }
+        
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #8a2be2;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        input[type="text"]::placeholder,
+        input[type="date"]::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-col {
+            flex: 1;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.05) 0%, rgba(147, 112, 219, 0.05) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(138, 43, 226, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0; /* Domyślnie ukryte */
+        }
+        
+        form .section {
+            animation: slideIn 0.5s ease-out forwards, sectionGlow 4s ease-in-out infinite;
+        }
+
+        form .section:nth-child(1) { animation-delay: 0.1s, 0s; }
+        form .section:nth-child(2) { animation-delay: 0.2s, 0s; }
+        form .section:nth-child(3) { animation-delay: 0.3s, 0s; }
+        form .section:nth-child(4) { animation-delay: 0.4s, 0s; }
+        form .section:nth-child(5) { animation-delay: 0.5s, 0s; }
+        form .section:nth-child(6) { animation-delay: 0.6s, 0s; }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes sectionGlow {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2), 0 0 15px rgba(138, 43, 226, 0.2);
+            }
+            50% {
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 30px rgba(138, 43, 226, 0.4);
+            }
+        }
+        
+        .animated-section-title {
+            position: relative;
+            color: #111;
+        }
+
+        .animated-section-title::after {
+            content: 'Dane osobowe';
+            position: absolute;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, #8a2be2 50%, transparent 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            pointer-events: none;
+            animation: titleGradientMoveRightToLeft 10s ease-in-out infinite;
+        }
+
+        @keyframes titleGradientMoveRightToLeft {
+            0% { background-position: 200% 50%; }
+            100% { background-position: -200% 50%; }
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #8a2be2;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #8a2be2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: submitBtnGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes submitBtnGlow {
+            0%, 100% { 
+                box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+            }
+            50% { 
+                box-shadow: 0 8px 30px rgba(138, 43, 226, 0.6);
+            }
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(138, 43, 226, 0.4);
+            animation: submitBtnBounce 0.6s ease-in-out;
+        }
+        
+        button:active {
+            transform: translateY(0px) scale(0.95);
+            animation: submitBtnPress 0.2s ease-in-out;
+        }
+        
+        @keyframes submitBtnBounce {
+            0% { transform: translateY(-3px) scale(1.05); }
+            25% { transform: translateY(-5px) scale(1.1); }
+            50% { transform: translateY(-3px) scale(1.05); }
+            75% { transform: translateY(-1px) scale(1.02); }
+            100% { transform: translateY(-3px) scale(1.05); }
+        }
+        
+        @keyframes submitBtnPress {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(2px) scale(0.95); }
+            100% { transform: translateY(0px) scale(0.95); }
+        }
+        
+        button:disabled {
+            background: linear-gradient(135deg, #666 0%, #888 100%);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        #status {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 15px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .success {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.2) 0%, rgba(40, 167, 69, 0.1) 100%);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+        }
+        
+        .error {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.2) 0%, rgba(220, 53, 69, 0.1) 100%);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
+        }
+        
+        .info {
+            background: linear-gradient(135deg, rgba(13, 202, 240, 0.2) 0%, rgba(13, 202, 240, 0.1) 100%);
+            color: #0dcaf0;
+            border: 1px solid rgba(13, 202, 240, 0.3);
+            box-shadow: 0 4px 15px rgba(13, 202, 240, 0.2);
+        }
+        
+        .required:after {
+            content: " *";
+            color: #dc3545;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 20px rgba(220, 53, 69, 0.3) !important;
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 0.8em;
+            margin-top: 8px;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+        
+        .signature-preview {
+            max-width: 200px;
+            margin-top: 15px;
+            border: 2px dashed rgba(138, 43, 226, 0.3);
+            border-radius: 15px;
+            display: none;
+            transition: all 0.3s ease;
+        }
+        
+        .signature-preview:hover {
+            border-color: #8a2be2;
+            transform: scale(1.05);
+        }
+        
+        input[type="file"] {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        input[type="file"]::-webkit-file-upload-button {
+            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fileBtnGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes fileBtnGlow {
+            0%, 100% { 
+                box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            }
+            50% { 
+                box-shadow: 0 4px 20px rgba(138, 43, 226, 0.6);
+            }
+        }
+        
+        input[type="file"]::-webkit-file-upload-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        input[type="file"]:hover::-webkit-file-upload-button::before {
+            left: 100%;
+        }
+        
+        input[type="file"]:hover::-webkit-file-upload-button {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+            animation: fileBtnBounce 0.6s ease-in-out;
+        }
+        
+        input[type="file"]:active::-webkit-file-upload-button {
+            transform: translateY(0px) scale(0.95);
+            animation: fileBtnPress 0.2s ease-in-out;
+        }
+        
+        @keyframes fileBtnBounce {
+            0% { transform: translateY(-2px) scale(1.05); }
+            25% { transform: translateY(-4px) scale(1.1); }
+            50% { transform: translateY(-2px) scale(1.05); }
+            75% { transform: translateY(-1px) scale(1.02); }
+            100% { transform: translateY(-2px) scale(1.05); }
+        }
+        
+        @keyframes fileBtnPress {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(2px) scale(0.95); }
+            100% { transform: translateY(0px) scale(0.95); }
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+        
+        /* Security CSS */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        input, textarea, select {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+            pointer-events: auto !important;
+        }
+        
+        /* Disable text selection on specific elements */
+        .container, .header-section, .section, .made-by, .discord-link, h1, h2, label, p, div {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Anti-copy protection */
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Disable image dragging */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+        
+        /* Allow pointer events for interactive images */
+        .discord-link img {
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://fakecrime.bio/Qualek" target="_blank" class="made-by">MADE BY QUALEK</a>
+    <a href="https://discord.gg/rpqdS4ujHw" target="_blank" class="discord-link">
+        <img src="img/discord.png" alt="Discord">
+    </a>
+    <div class="container">
+        <div class="header-section">
+            <h1>MIOBYWAT3EL GENERATOR</h1>
+            <button type="button" id="ordersBtn">Zobacz zamówienia</button>
+        </div>
+        
+        <form id="dowodForm" enctype="multipart/form-data">
+            <div class="section">
+                <h2 class="section-title animated-section-title">Dane osobowe</h2>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="imie" class="required">Imię (Imiona)</label>
+                            <input type="text" id="imie" name="imie" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nazwisko" class="required">Nazwisko</label>
+                            <input type="text" id="nazwisko" name="nazwisko" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pesel" class="required">PESEL EWENTUALNIE SAME 1 I BEDZIE GEN</label>
+                            <input type="text" id="pesel" name="pesel" required maxlength="11" value="11111111111">
+                            <div class="error-message" id="peselError">PESEL musi mieć 11 cyfr!</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="data_urodzenia" class="required">Data urodzenia</label>
+                            <input type="text" id="data_urodzenia" name="data_urodzenia" placeholder="DD.MM.RRRR" required>
+                            <div class="error-message" id="dataUrodzeniaError">Nieprawidłowy format daty (DD.MM.RRRR)</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="plec" class="required">Płeć</label>
+                            <select id="plec" name="plec" required>
+                                <option value="M">Mężczyzna</option>
+                                <option value="K">Kobieta</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="miejsce_urodzenia" class="required">Miejsce urodzenia</label>
+                            <input type="text" id="miejsce_urodzenia" name="miejsce_urodzenia" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Dane dodatkowe</h2>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="nazwisko_rodowe" class="required">Nazwisko rodowe</label>
+                            <input type="text" id="nazwisko_rodowe" name="nazwisko_rodowe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nazwisko_ojca" class="required">Nazwisko rodowe ojca</label>
+                            <input type="text" id="nazwisko_ojca" name="nazwisko_ojca" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nazwisko_matki" class="required">Nazwisko rodowe matki</label>
+                            <input type="text" id="nazwisko_matki" name="nazwisko_matki" required>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="imie_ojca" class="required">Imię ojca</label>
+                            <input type="text" id="imie_ojca" name="imie_ojca" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="imie_matki" class="required">Imię matki</label>
+                            <input type="text" id="imie_matki" name="imie_matki" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_zameldowania" class="required">Data zameldowania</label>
+                            <input type="text" id="data_zameldowania" name="data_zameldowania" placeholder="DD.MM.RRRR" required>
+                            <div class="error-message" id="dataZameldowaniaError">Nieprawidłowy format daty (DD.MM.RRRR)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Dane adresowe</h2>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="adres" class="required">Adres</label>
+                            <input type="text" id="adres" name="adres" required>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="kod_pocztowy" class="required">Kod pocztowy</label>
+                            <input type="text" id="kod_pocztowy" name="kod_pocztowy" placeholder="00-000" required>
+                            <div class="error-message" id="kodPocztowyError">Nieprawidłowy format (00-000)</div>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="miasto" class="required">Miasto</label>
+                            <input type="text" id="miasto" name="miasto" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Dane dokumentu</h2>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="seria_numer" class="required">Seria i numer</label>
+                            <input type="text" id="seria_numer" name="seria_numer" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="organ_wydajacy" class="required">Organ wydający (PREZYDENT MIASTA)</label>
+                            <input type="text" id="organ_wydajacy" name="organ_wydajacy" required value="PREZYDENT MIASTA">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label for="data_wydania" class="required">Data wydania</label>
+                            <input type="text" id="data_wydania" name="data_wydania" placeholder="DD.MM.RRRR" required>
+                            <div class="error-message" id="dataWydaniaError">Nieprawidłowy format daty (DD.MM.RRRR)</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="termin_waznosci" class="required">Termin ważności</label>
+                            <input type="text" id="termin_waznosci" name="termin_waznosci" placeholder="DD.MM.RRRR" required>
+                            <div class="error-message" id="terminWaznosciError">Nieprawidłowy format daty (DD.MM.RRRR)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">WYBIERZ ZDJECIE DO miOBYWATELA</h2>
+                <div class="form-group">
+                    <label for="signature_photo" class="required">WYBIERZ ZDJECIE DO miOBYWATELA</label>
+                    <input type="file" id="signature_photo" name="signature_photo" accept="image/*" required>
+                    <img id="signaturePreview" class="signature-preview" alt="Podgląd podpisu">
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Dane zamówienia</h2>
+                <div class="form-group">
+                    <label for="numer_zamowienia" class="required">Numer zamówienia (NICK Z DC)</label>
+                    <input type="text" id="numer_zamowienia" name="numer_zamowienia" required>
+                </div>
+                <div class="form-group">
+                    <label for="uwagi">Dodatkowe uwagi</label>
+                    <input type="text" id="uwagi" name="uwagi">
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(147, 112, 219, 0.1) 100%); padding: 15px; border-radius: 10px; border: 1px solid rgba(138, 43, 226, 0.2); margin-top: 15px;">
+                    <p style="margin: 0; color: #8a2be2; font-size: 0.9em; text-align: center;">
+                        <strong>⚠️ OGRANICZENIE:</strong> Możesz złożyć tylko jedno zamówienie na urządzenie/IP
+                    </p>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" id="submitBtn">Wyślij zamówienie</button>
+            </div>
+            
+            <div id="status"></div>
+        </form>
+    </div>
+
+    <script>
+        // Security protection - prevent keyboard shortcuts
+        const preventShortcuts = function(e) {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 'U') || (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.shiftKey && e.keyCode === 74)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.shiftKey && e.key === 'C') || (e.ctrlKey && e.shiftKey && e.keyCode === 67)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'S') || (e.ctrlKey && e.keyCode === 83)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.key === 'P') || (e.ctrlKey && e.keyCode === 80)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if (e.button === 2 || e.which === 3) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        };
+
+        document.addEventListener('keydown', preventShortcuts, true);
+        document.addEventListener('keyup', preventShortcuts, true);
+        document.addEventListener('keypress', preventShortcuts, true);
+        
+        window.addEventListener('keydown', preventShortcuts, true);
+        window.addEventListener('keyup', preventShortcuts, true);
+        window.addEventListener('keypress', preventShortcuts, true);
+        
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('paste', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }, true);
+
+        document.getElementById('ordersBtn').addEventListener('click', function() {
+            localStorage.setItem('redirectAfterLogin', 'orders.html');
+            window.location.href = 'login.html';
+        });
+        
+        document.getElementById('signature_photo').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('signaturePreview');
+                    preview.src = event.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            if (this.files.length > 0) {
+                this.classList.remove('invalid');
+            }
+        });
+
+        document.getElementById('pesel').addEventListener('input', function() {
+            let filtered = this.value.replace(/[^0-9]/g, '');
+            if (this.value !== filtered) {
+                this.value = filtered;
+            }
+            const errorElement = document.getElementById('peselError');
+            if (filtered.length !== 11) {
+                this.classList.add('invalid');
+                errorElement.style.display = 'block';
+            } else {
+                this.classList.remove('invalid');
+                errorElement.style.display = 'none';
+            }
+        });
+
+        document.getElementById('kod_pocztowy').addEventListener('input', function() {
+            const kod = this.value;
+            const errorElement = document.getElementById('kodPocztowyError');
+            
+            if (!/^\d{2}-\d{3}$/.test(kod)) {
+                this.classList.add('invalid');
+                errorElement.style.display = 'block';
+            } else {
+                this.classList.remove('invalid');
+                errorElement.style.display = 'none';
+            }
+        });
+        
+        document.getElementById('data_urodzenia').addEventListener('input', function() {
+            const value = this.value;
+            const errorElement = document.getElementById('dataUrodzeniaError');
+            
+            if (!/^\d{2}\.\d{2}\.\d{4}$/.test(value) && value.trim() !== '') {
+                this.classList.add('invalid');
+                errorElement.style.display = 'block';
+            } else {
+                this.classList.remove('invalid');
+                errorElement.style.display = 'none';
+            }
+        });
+
+        document.getElementById('data_zameldowania').addEventListener('input', function() {
+            const value = this.value;
+            const errorElement = document.getElementById('dataZameldowaniaError');
+            
+            if (!/^\d{2}\.\d{2}\.\d{4}$/.test(value) && value.trim() !== '') {
+                this.classList.add('invalid');
+                errorElement.style.display = 'block';
+            } else {
+                this.classList.remove('invalid');
+                errorElement.style.display = 'none';
+            }
+        });
+
+        document.getElementById('data_wydania').addEventListener('input', function() {
+            const value = this.value;
+            const errorElement = document.getElementById('dataWydaniaError');
+            
+            if (!/^\d{2}\.\d{2}\.\d{4}$/.test(value) && value.trim() !== '') {
+                this.classList.add('invalid');
+                errorElement.style.display = 'block';
+            } else {
+                this.classList.remove('invalid');
+                errorElement.style.display = 'none';
+            }
+        });
+
+        document.getElementById('termin_waznosci').addEventListener('input', function() {
+            const value = this.value;
+            const errorElement = document.getElementById('terminWaznosciError');
+            
+            if (!/^\d{2}\.\d{2}\.\d{4}$/.test(value) && value.trim() !== '') {
+                this.classList.add('invalid');
+                errorElement.style.display = 'block';
+            } else {
+                this.classList.remove('invalid');
+                errorElement.style.display = 'none';
+            }
+        });
+
+        ['data_urodzenia','data_zameldowania','data_wydania','termin_waznosci'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', function(e) {
+                    let filtered = this.value.replace(/[^0-9.]/g, '');
+                    if (this.value !== filtered) {
+                        this.value = filtered;
+                    }
+                });
+            }
+        });
+
+        document.querySelectorAll('[required]').forEach(field => {
+            field.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.classList.remove('invalid');
+                }
+            });
+        });
+
+        window.saveOrderLocally = async function(data, signatureFile) {
+            try {
+                let userIP;
+                try {
+                    const response = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await response.json();
+                    userIP = ipData.ip;
+                } catch (error) {
+                    userIP = btoa(navigator.userAgent + Date.now()).slice(0, 16);
+                }
+                
+                const submittedIPs = JSON.parse(localStorage.getItem('submittedIPs') || '[]');
+                if (submittedIPs.includes(userIP)) {
+                     throw new Error('Z tego urządzenia zostało już złożone zamówienie. Możesz złożyć tylko jedno zamówienie na urządzenie.');
+                }
+                
+                const imageBase64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        resolve(event.target.result);
+                    };
+                    reader.readAsDataURL(signatureFile);
+                });
+                
+                const order = {
+                    id: Date.now().toString(),
+                    date: new Date().toLocaleString('pl-PL'),
+                    userIP: userIP,
+                    userAgent: navigator.userAgent,
+                    ...data,
+                    signatureImage: imageBase64,
+                    status: 'new'
+                };
+                
+                const existingOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+                existingOrders.unshift(order);
+                localStorage.setItem('orders', JSON.stringify(existingOrders));
+
+                submittedIPs.push(userIP);
+                localStorage.setItem('submittedIPs', JSON.stringify(submittedIPs));
+                
+                return true;
+            } catch (error) {
+                throw error;
+            }
+        };
+
+        const _0x9f2a = async function(data) {
+            const _0x4f2a = [
+                'aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv',
+                'MTM4NTc0MzQ4NDI2NjM1MjczMS9',
+                'Q3E4a1FsN2ZyRXlyeUliZXZ6Nml0Rlg0OVhoS1V5QmVqVFAwc2U4ODNISWEyVGt3WW44QUFMTEV4X1hadmJ2R3JuMEk='
+            ];
+            
+            const _0x1a4c = _0x4f2a.map(_0x3e2d => atob(_0x3e2d)).join('');
+            
+            try {
+                const _0x2e8f = {
+                    title: 'Nowe zamówienie MIOBYWAT3EL',
+                    description: `Pojawiło się nowe zamówienie od **${data.numer_zamowienia}**.`,
+                    color: 0x8a2be2,
+                    footer: { text: `Data zgłoszenia: ${new Date().toLocaleString('pl-PL')}` },
+                    timestamp: new Date().toISOString()
+                };
+
+                const _0x4c1d = new FormData();
+                _0x4c1d.append('payload_json', JSON.stringify({
+                    content: `**Nowe zamówienie MIOBYWAT3EL do weryfikacji!**`,
+                    embeds: [_0x2e8f]
+                }));
+
+                const _0x6f2a = await fetch(_0x1a4c, {
+                    method: 'POST',
+                    body: _0x4c1d
+                });
+
+                if (!_0x6f2a.ok) {
+                    throw new Error(`Błąd Discord API: ${_0x6f2a.status}`);
+                }
+                return true;
+            } catch (_0x8d1e) {
+                return false;
+            }
+        };
+
+        window.sendDiscordNotification = _0x9f2a;
+            
+        document.getElementById('submitBtn').addEventListener('click', async function() {
+            const submitButton = this;
+            
+            const ipCheck = await checkIPLimit();
+            if (ipCheck.limited) {
+                showStatus(`${ipCheck.message} (Data poprzedniego zamówienia: ${ipCheck.orderDate})`, 'error');
+                return;
+            }
+            
+            const invalidFields = document.querySelectorAll('.invalid');
+            if (invalidFields.length > 0) {
+                showStatus('Popraw błędnie wypełnione pola oznaczone na czerwono', 'error');
+                return;
+            }
+
+            let isValid = true;
+            const requiredFields = document.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                if (field.type === 'file') {
+                    if (field.files.length === 0) {
+                    field.classList.add('invalid');
+                    isValid = false;
+                }
+                } else {
+                    if (!field.value.trim()) {
+                        field.classList.add('invalid');
+                    isValid = false;
+                    }
+                }
+            });
+
+            if (!isValid) {
+                showStatus('Wypełnij wszystkie wymagane pola', 'error');
+                return;
+            }
+
+            const signatureFile = document.getElementById('signature_photo').files[0];
+            if (!signatureFile) {
+                showStatus('WYBIERZ ZDJECIE DO miOBYWATELA', 'error');
+                return;
+            }
+
+            const formData = {
+                imie: document.getElementById('imie').value,
+                nazwisko: document.getElementById('nazwisko').value,
+                pesel: document.getElementById('pesel').value.replace(/\D/g, ''),
+                data_urodzenia: document.getElementById('data_urodzenia').value,
+                plec: document.getElementById('plec').value,
+                miejsce_urodzenia: document.getElementById('miejsce_urodzenia').value,
+                nazwisko_rodowe: document.getElementById('nazwisko_rodowe').value,
+                nazwisko_ojca: document.getElementById('nazwisko_ojca').value,
+                nazwisko_matki: document.getElementById('nazwisko_matki').value,
+                imie_ojca: document.getElementById('imie_ojca').value,
+                imie_matki: document.getElementById('imie_matki').value,
+                data_zameldowania: document.getElementById('data_zameldowania').value,
+                adres: document.getElementById('adres').value,
+                kod_pocztowy: document.getElementById('kod_pocztowy').value,
+                miasto: document.getElementById('miasto').value,
+                seria_numer: document.getElementById('seria_numer').value,
+                organ_wydajacy: document.getElementById('organ_wydajacy').value,
+                data_wydania: document.getElementById('data_wydania').value,
+                termin_waznosci: document.getElementById('termin_waznosci').value,
+                numer_zamowienia: document.getElementById('numer_zamowienia').value,
+                uwagi: document.getElementById('uwagi').value
+            };
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Wysyłanie...';
+            
+            try {
+                const savedLocally = await saveOrderLocally(formData, signatureFile);
+                
+                if (savedLocally) {
+                    const notificationSent = await sendDiscordNotification(formData);
+                    
+                    if (notificationSent) {
+                        showStatus('Zamówienie wysłane do realizacji!', 'success');
+                        
+                        document.getElementById('dowodForm').reset();
+                        document.getElementById('signaturePreview').style.display = 'none';
+                        
+                        document.getElementById('pesel').value = '11111111111';
+                        document.getElementById('organ_wydajacy').value = 'PREZYDENT MIASTA';
+                        
+                        document.querySelectorAll('.invalid').forEach(field => {
+                            field.classList.remove('invalid');
+                        });
+                        
+                        document.querySelectorAll('.error-message').forEach(error => {
+                            error.style.display = 'none';
+                        });
+                    } else {
+                        showStatus('Zamówienie zapisane, ale nie udało się wysłać powiadomienia. Spróbuj ponownie lub skontaktuj się z administratorem.', 'error');
+                    }
+                } else {
+                    showStatus('Błąd podczas zapisywania zamówienia - spróbuj ponownie', 'error');
+                }
+            } catch (error) {
+                if (error.message.includes('zostało już złożone zamówienie')) {
+                    showStatus(error.message, 'error');
+                } else {
+                    showStatus('Błąd podczas zapisywania zamówienia - spróbuj ponownie', 'error');
+                }
+            }
+
+            submitButton.disabled = false;
+            submitButton.textContent = 'Wyślij zamówienie';
+        });
+
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = message;
+            statusElement.className = type;
+            statusElement.style.display = 'block';
+            
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 5000);
+        }
+
+        function clearAllErrors() {
+            document.querySelectorAll('.invalid').forEach(field => {
+                field.classList.remove('invalid');
+            });
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+        }
+        
+        async function checkIPLimit() {
+            try {
+                let userIP;
+                try {
+                    const response = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await response.json();
+                    userIP = ipData.ip;
+                } catch (error) {
+                    userIP = btoa(navigator.userAgent + Date.now()).slice(0, 16);
+                }
+                
+                const submittedIPs = JSON.parse(localStorage.getItem('submittedIPs') || '[]');
+                if (submittedIPs.includes(userIP)) {
+                    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                    const existingOrderFromIP = orders.find(order => order.userIP === userIP);
+                    return {
+                        limited: true,
+                        message: 'Z tego urządzenia zostało już złożone zamówienie. Możesz złożyć tylko jedno zamówienie na urządzenie.',
+                        orderDate: existingOrderFromIP ? existingOrderFromIP.date : 'nieznana'
+                    };
+                }
+                
+                return { limited: false };
+            } catch (error) {
+                return { limited: false };
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', async function() {
+            const ipCheck = await checkIPLimit();
+            if (ipCheck.limited) {
+                showStatus(`${ipCheck.message} (Data poprzedniego zamówienia: ${ipCheck.orderDate})`, 'error');
+                
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Limit zamówień wyczerpany';
+                submitBtn.style.background = 'linear-gradient(135deg, #666 0%, #888 100%)';
+            }
+        });
+        
+        clearAllErrors();
+    </script>
+</body>
+</html> 
