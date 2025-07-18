@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIOBYWAT3EL - Logowanie</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #000000 0%, #1a0033 50%, #000000 100%);
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        input, textarea, select {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+            pointer-events: auto !important;
+        }
+        .login-container, .made-by, .discord-link, h1, h2, label, p, div {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none;
+        }
+        .discord-link img {
+            pointer-events: auto;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(147, 112, 219, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(75, 0, 130, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            background: linear-gradient(145deg, #111111 0%, #1a1a1a 100%);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(138, 43, 226, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.6s ease;
+        }
+        
+        @keyframes slideIn {
+            from { 
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .made-by {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 12px;
+            color: #8a2be2;
+            z-index: 100;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2) 0%, rgba(147, 112, 219, 0.2) 100%);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.4),
+                0 4px 15px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: madeByGlow 3s ease-in-out infinite, madeByFloat 4s ease-in-out infinite;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .made-by:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.6),
+                0 8px 25px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3) 0%, rgba(147, 112, 219, 0.3) 100%);
+            animation: madeByGlow 1.5s ease-in-out infinite, madeByFloat 2s ease-in-out infinite;
+        }
+        
+        .made-by:active {
+            transform: scale(0.95) rotate(-1deg);
+            animation: madeByPulse 0.3s ease-in-out;
+        }
+        
+        @keyframes madeByPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.9); }
+            100% { transform: scale(0.95); }
+        }
+        
+        @keyframes madeByGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 20px rgba(138, 43, 226, 0.4),
+                    0 4px 15px rgba(0, 0, 0, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 30px rgba(138, 43, 226, 0.7),
+                    0 8px 25px rgba(0, 0, 0, 0.4);
+            }
+        }
+        
+        @keyframes madeByFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% { 
+                transform: translateY(-2px) rotate(0.5deg);
+            }
+            50% { 
+                transform: translateY(-1px) rotate(-0.5deg);
+            }
+            75% { 
+                transform: translateY(-3px) rotate(0.5deg);
+            }
+        }
+
+        .discord-link {
+            position: absolute;
+            top: 55px;
+            left: 10px;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .discord-link:hover {
+            transform: scale(1.1);
+        }
+
+        .discord-link img {
+            width: 64px;
+            height: 49px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        
+        h1 {
+            position: relative;
+            display: block;
+            width: 100%;
+            color: #111;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+        h1::after {
+            content: 'MIOBYWAT3EL';
+            position: absolute;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, #8a2be2 50%, transparent 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            pointer-events: none;
+            animation: titleGradientMove 10s ease-in-out infinite;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+        .login-gradient-title {
+            position: relative;
+            display: block;
+            width: 100%;
+            color: #111;
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .login-gradient-title::after {
+            content: 'Logowanie';
+            position: absolute;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, #8a2be2 50%, transparent 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            pointer-events: none;
+            animation: titleGradientMove 10s ease-in-out infinite;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+        @keyframes titleGradientMove {
+            0% { background-position: -200% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        h2 {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #8a2be2;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9em;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(138, 43, 226, 0.2);
+            border-radius: 15px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.05) 0%, rgba(147, 112, 219, 0.05) 100%);
+            color: #fff;
+            backdrop-filter: blur(5px);
+        }
+        
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #8a2be2;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            animation: loginBtnGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes loginBtnGlow {
+            0%, 100% { 
+                box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
+            }
+            50% { 
+                box-shadow: 0 8px 30px rgba(138, 43, 226, 0.6);
+            }
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(138, 43, 226, 0.4);
+            animation: loginBtnBounce 0.6s ease-in-out;
+        }
+        
+        button:active {
+            transform: translateY(0px) scale(0.98);
+            animation: loginBtnPress 0.2s ease-in-out;
+        }
+        
+        @keyframes loginBtnBounce {
+            0% { transform: translateY(-3px) scale(1.02); }
+            25% { transform: translateY(-5px) scale(1.05); }
+            50% { transform: translateY(-3px) scale(1.02); }
+            75% { transform: translateY(-1px) scale(1.01); }
+            100% { transform: translateY(-3px) scale(1.02); }
+        }
+        
+        @keyframes loginBtnPress {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(2px) scale(0.98); }
+            100% { transform: translateY(0px) scale(0.98); }
+        }
+        
+        #status {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 15px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .success {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.2) 0%, rgba(40, 167, 69, 0.1) 100%);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+        }
+        
+        .error {
+            background: linear-gradient(135deg, rgba(220, 53, 69, 0.2) 0%, rgba(220, 53, 69, 0.1) 100%);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
+        }
+        
+        .required:after {
+            content: " *";
+            color: #dc3545;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .back-arrow {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+            z-index: 1000;
+            font-size: 32px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .back-arrow:hover {
+            transform: translateY(-2px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+        }
+        
+        .back-arrow::before {
+            content: '←';
+            font-weight: 900;
+            transform: translateY(-3px);
+            text-shadow: 0 0 2px white;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://fakecrime.bio/Qualek" target="_blank" class="made-by">MADE BY QUALEK</a>
+    <a href="https://discord.gg/rpqdS4ujHw" target="_blank" class="discord-link">
+        <img src="img/discord.png" alt="Discord">
+    </a>
+    <a class='back-arrow' href='/' title='Powrót do głównej strony'></a>
+    <div class="login-container">
+        <h1>MIOBYWAT3EL</h1>
+        <h2 class="login-gradient-title">Logowanie</h2>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username" class="required">Nazwa użytkownika</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" class="required">Hasło</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" id="loginBtn">Zaloguj się</button>
+            </div>
+            
+            <div id="status"></div>
+        </form>
+    </div>
+
+    <script>
+        (function() {
+            const devtoolsThreshold = 160;
+            
+            // Extreme protection - browser fingerprinting
+            const browserFingerprint = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.textBaseline = 'top';
+                ctx.font = '14px Arial';
+                ctx.fillText('Fingerprint test', 2, 2);
+                const fingerprint = canvas.toDataURL();
+                
+                // Check if fingerprint matches expected pattern
+                if (!fingerprint.includes('data:image/png;base64,')) {
+                    blockPage();
+                    return;
+                }
+                
+                // Additional fingerprint checks
+                const plugins = navigator.plugins.length;
+                const languages = navigator.languages.length;
+                const hardwareConcurrency = navigator.hardwareConcurrency;
+                
+                if (plugins < 1 || languages < 1 || hardwareConcurrency < 1) {
+                    blockPage();
+                    return;
+                }
+            };
+            
+            // Content encryption and obfuscation
+            const encryptContent = () => {
+                // Encrypt sensitive content
+                const sensitiveElements = document.querySelectorAll('script, style');
+                sensitiveElements.forEach(el => {
+                    if (el.innerHTML && !el.hasAttribute('data-encrypted')) {
+                        el.setAttribute('data-encrypted', 'true');
+                        el.innerHTML = btoa(el.innerHTML);
+                    }
+                });
+                
+                // Add decoy content
+                const decoyScript = document.createElement('script');
+                decoyScript.innerHTML = `
+                    // FAKE SCRIPT - DO NOT READ
+                    console.log('This is fake code');
+                    alert('Fake alert');
+                `;
+                document.head.appendChild(decoyScript);
+            };
+            
+            // Server-side simulation
+            const serverSideCheck = () => {
+                // Simulate server-side validation
+                const timestamp = Date.now();
+                const randomToken = Math.random().toString(36).substring(7);
+                
+                // Check if request seems legitimate
+                if (timestamp % 1000 < 100) { // 10% chance of blocking
+                    blockPage();
+                    return;
+                }
+                
+                // Validate session-like behavior
+                if (!sessionStorage.getItem('legitimate_user')) {
+                    sessionStorage.setItem('legitimate_user', randomToken);
+                }
+            };
+            
+            // Advanced blocking mechanisms
+            const advancedBlocking = () => {
+                // Block by user agent patterns
+                const userAgent = navigator.userAgent.toLowerCase();
+                const blockedUserAgents = [
+                    'view-page-source',
+                    'source-viewer',
+                    'html-viewer',
+                    'code-viewer',
+                    'webpage-source',
+                    'viewsource',
+                    'sourcecode',
+                    'htmlsource',
+                    'curl',
+                    'wget',
+                    'python',
+                    'node',
+                    'phantom',
+                    'selenium',
+                    'puppeteer'
+                ];
+                
+                if (blockedUserAgents.some(agent => userAgent.includes(agent))) {
+                    blockPage();
+                    return;
+                }
+                
+                // Block by timing patterns (external viewers often load slower)
+                const loadTime = performance.now();
+                if (loadTime > 5000) { // If page takes too long to load
+                    blockPage();
+                    return;
+                }
+                
+                // Block by screen size patterns
+                const screenWidth = window.screen.width;
+                const screenHeight = window.screen.height;
+                if (screenWidth < 100 || screenHeight < 100) { // Unrealistic screen sizes
+                    blockPage();
+                    return;
+                }
+                
+                // Block by window properties
+                if (window.opener && window.opener !== window) {
+                    blockPage();
+                    return;
+                }
+                
+                // Block by document properties
+                if (document.hidden === false && document.visibilityState === 'visible') {
+                    // Additional check for external viewers
+                    setTimeout(() => {
+                        if (document.body && document.body.innerHTML.length > 10000) {
+                            // If body is too large, might be external viewer
+                            const suspiciousElements = document.querySelectorAll('iframe, embed, object');
+                            if (suspiciousElements.length > 0) {
+                                blockPage();
+                            }
+                        }
+                    }, 1000);
+                }
+            };
+            
+            // Block external source viewers
+            const blockExternalViewers = () => {
+                const referrer = document.referrer;
+                const currentUrl = window.location.href;
+                
+                // Block known source viewing sites
+                const blockedDomains = [
+                    'view-page-source.com',
+                    'viewsource.com',
+                    'source-code-viewer.com',
+                    'html-viewer.com',
+                    'code-viewer.com',
+                    'webpage-source.com',
+                    'viewhtmlsource.com',
+                    'sourcecodeviewer.com',
+                    'htmlsourceviewer.com',
+                    'viewpagesource.com',
+                    'pagesourceviewer.com',
+                    'websitesource.com',
+                    'viewsourcecode.com',
+                    'htmlsource.com',
+                    'sourceviewer.com',
+                    'view-source.com',
+                    'page-source.com',
+                    'webpage-source.com',
+                    'htmlsourceviewer.com',
+                    'sourcecodeviewer.com',
+                    'github.com',
+                    'raw.githubusercontent.com',
+                    'pastebin.com',
+                    'jsfiddle.net',
+                    'codepen.io'
+                ];
+                
+                // Check if referrer is from blocked domain
+                if (referrer && blockedDomains.some(domain => referrer.includes(domain))) {
+                    blockPage();
+                    return;
+                }
+                
+                // Check if current URL is being accessed through external viewer
+                if (currentUrl.includes('view-page-source.com') || 
+                    currentUrl.includes('viewsource.com') ||
+                    currentUrl.includes('source-code-viewer.com')) {
+                    blockPage();
+                    return;
+                }
+                
+                // Block iframe embedding
+                if (window.self !== window.top) {
+                    blockPage();
+                    return;
+                }
+                
+                // Additional checks
+                advancedBlocking();
+            };
+            
+            const blockPage = () => {
+                if (!document.getElementById('devtools-blocker')) {
+                    const blocker = document.createElement('div');
+                    blocker.id = 'devtools-blocker';
+                    blocker.style.position = 'fixed';
+                    blocker.style.top = '0';
+                    blocker.style.left = '0';
+                    blocker.style.width = '100%';
+                    blocker.style.height = '100%';
+                    blocker.style.background = 'black';
+                    blocker.style.color = 'white';
+                    blocker.style.display = 'flex';
+                    blocker.style.justifyContent = 'center';
+                    blocker.style.alignItems = 'center';
+                    blocker.style.fontSize = '2em';
+                    blocker.style.fontFamily = 'monospace';
+                    blocker.style.textAlign = 'center';
+                    blocker.style.zIndex = '999999';
+                    blocker.innerHTML = 'STAY OUT';
+                    document.body.appendChild(blocker);
+                    
+                    // Prevent any further interaction
+                    document.body.style.pointerEvents = 'none';
+                    document.body.style.userSelect = 'none';
+                    
+                    // Clear all content
+                    document.body.innerHTML = '';
+                    document.body.appendChild(blocker);
+                }
+            };
+            const checkDevTools = () => {
+                const isDevToolsOpen = (window.outerWidth - window.innerWidth) > devtoolsThreshold || 
+                                       (window.outerHeight - window.innerHeight) > devtoolsThreshold;
+                if (isDevToolsOpen) {
+                    blockPage();
+                }
+            };
+            
+            // Radical protection - dynamic content generation
+            const dynamicContentGeneration = () => {
+                // Store original content in memory
+                if (!window.originalContent) {
+                    window.originalContent = {
+                        body: document.body.innerHTML,
+                        head: document.head.innerHTML
+                    };
+                    
+                    // Clear the page
+                    document.body.innerHTML = '';
+                    document.head.innerHTML = '';
+                    
+                    // Rebuild page dynamically
+                    setTimeout(() => {
+                        if (document.body.innerHTML === '') {
+                            // Reconstruct the page
+                            document.body.innerHTML = window.originalContent.body;
+                            document.head.innerHTML = window.originalContent.head;
+                            
+                            // Reinitialize scripts
+                            const scripts = document.querySelectorAll('script');
+                            scripts.forEach(script => {
+                                if (script.src) {
+                                    const newScript = document.createElement('script');
+                                    newScript.src = script.src;
+                                    document.head.appendChild(newScript);
+                                } else if (script.innerHTML) {
+                                    const newScript = document.createElement('script');
+                                    newScript.innerHTML = script.innerHTML;
+                                    document.head.appendChild(newScript);
+                                }
+                            });
+                        }
+                    }, 100);
+                }
+            };
+            
+            // Run initial checks
+            browserFingerprint();
+            encryptContent();
+            serverSideCheck();
+            blockExternalViewers();
+            advancedBlocking();
+            dynamicContentGeneration();
+            
+            // Dynamic code protection
+            const dynamicProtection = () => {
+                // Randomly change element IDs and classes
+                const elements = document.querySelectorAll('[id], [class]');
+                elements.forEach(el => {
+                    if (Math.random() < 0.1) { // 10% chance
+                        if (el.id) el.id = 'protected_' + Math.random().toString(36).substr(2, 9);
+                        if (el.className) el.className = 'protected_' + Math.random().toString(36).substr(2, 9);
+                    }
+                });
+                
+                // Add fake elements to confuse viewers
+                if (Math.random() < 0.05) { // 5% chance
+                    const fakeElement = document.createElement('div');
+                    fakeElement.style.display = 'none';
+                    fakeElement.innerHTML = '<!-- FAKE CODE -->';
+                    document.body.appendChild(fakeElement);
+                }
+            };
+            
+            // Additional blocking for specific patterns
+            const patternBlocking = () => {
+                // Block if page is accessed through proxy or VPN
+                if (navigator.webdriver === true) {
+                    blockPage();
+                    return;
+                }
+                
+                // Block if page is being scraped
+                if (document.readyState === 'complete' && performance.now() < 100) {
+                    blockPage();
+                    return;
+                }
+                
+                // Block if too many requests are made
+                if (performance.getEntriesByType('navigation').length > 10) {
+                    blockPage();
+                    return;
+                }
+            };
+            
+            try {
+                setInterval(checkDevTools, 500);
+                setInterval(blockExternalViewers, 1000);
+                setInterval(advancedBlocking, 1500);
+                setInterval(dynamicProtection, 2000);
+                setInterval(patternBlocking, 2500);
+                setInterval(browserFingerprint, 3000);
+                setInterval(encryptContent, 4000);
+                setInterval(serverSideCheck, 5000);
+            } catch (err) {}
+            
+            const preventShortcuts = function(e) {
+                if (e.key === 'F12' || e.keyCode === 123) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                
+                if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 'U') || (e.ctrlKey && e.keyCode === 85)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    return false;
+                }
+                
+                if ((e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                
+                if ((e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.shiftKey && e.keyCode === 74)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                
+                if ((e.ctrlKey && e.shiftKey && e.key === 'C') || (e.ctrlKey && e.shiftKey && e.keyCode === 67)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                
+                if ((e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'S') || (e.ctrlKey && e.keyCode === 83)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                
+                if ((e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.key === 'P') || (e.ctrlKey && e.keyCode === 80)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+                
+                if (e.button === 2 || e.which === 3) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            };
+
+            document.addEventListener('keydown', preventShortcuts, true);
+            document.addEventListener('keyup', preventShortcuts, true);
+            document.addEventListener('keypress', preventShortcuts, true);
+            
+            window.addEventListener('keydown', preventShortcuts, true);
+            window.addEventListener('keyup', preventShortcuts, true);
+            window.addEventListener('keypress', preventShortcuts, true);
+            
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+            
+            window.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+            
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+            
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+            
+            document.addEventListener('copy', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+            
+            document.addEventListener('cut', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+            
+            document.addEventListener('paste', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }, true);
+        })();
+    </script>
+    
+    <!-- Additional global protection for keyboard shortcuts -->
+    <script>
+        // Global protection - prevent keyboard shortcuts
+        const globalPreventShortcuts = function(e) {
+            if (e.key === 'F12' || e.keyCode === 123) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 'U') || (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.shiftKey && e.keyCode === 74)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.shiftKey && e.key === 'C') || (e.ctrlKey && e.shiftKey && e.keyCode === 67)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'S') || (e.ctrlKey && e.keyCode === 83)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if ((e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.key === 'P') || (e.ctrlKey && e.keyCode === 80)) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+            
+            if (e.button === 2 || e.which === 3) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        };
+
+        // Add global event listeners
+        document.addEventListener('keydown', globalPreventShortcuts, true);
+        document.addEventListener('keyup', globalPreventShortcuts, true);
+        document.addEventListener('keypress', globalPreventShortcuts, true);
+        
+        window.addEventListener('keydown', globalPreventShortcuts, true);
+        window.addEventListener('keyup', globalPreventShortcuts, true);
+        window.addEventListener('keypress', globalPreventShortcuts, true);
+        
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        window.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('paste', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }, true);
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }, true);
+    </script>
+    
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', async function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username.trim() || !password.trim()) {
+                showStatus('Wypełnij wszystkie pola', 'error');
+                return;
+            }
+            
+            const _0x9d2a = {
+                'UXVhbGVr': 'IVF1YWxlazk3IQ=='
+            };
+            
+            const encodedUsername = btoa(username);
+            const encodedPassword = btoa(password);
+            
+            if (_0x9d2a[encodedUsername] && _0x9d2a[encodedUsername] === encodedPassword) {
+                showStatus('Logowanie udane! Przekierowywanie...', 'success');
+                setLoginSession();
+                sendLoginNotification(username);
+                
+                setTimeout(() => {
+                    const redirect = localStorage.getItem('redirectAfterLogin') || 'orders.html';
+                    localStorage.removeItem('redirectAfterLogin');
+                    window.location.href = redirect;
+                }, 1500);
+            } else {
+                showStatus('Nieprawidłowa nazwa użytkownika lub hasło', 'error');
+            }
+        });
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('loginBtn').click();
+            }
+        });
+
+        function showStatus(message, type) {
+            const statusElement = document.getElementById('status');
+            statusElement.textContent = message;
+            statusElement.className = type;
+            statusElement.style.display = 'block';
+            
+            setTimeout(() => {
+                statusElement.style.display = 'none';
+            }, 5000);
+        }
+
+        const _0x8f3a = async function(username) {
+            const _0x5a3f = [
+                'aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv',
+                'MTM4NTc4NDgwOTkzODIyNzIxMS9',
+                'b0NzdXNPbTZDcXNwRExoTWpEeThQc2RfUXRsQmlwRHFnMWNvejNEU01jWmI3bllPZkpDUi13Z1YxVDFYSHB4bTV3c0k='
+            ];
+            
+            const _0x2a4b = _0x5a3f.map(_0x2e2d => atob(_0x2e2d)).join('');
+
+            try {
+                const _0x1e8f = {
+                    content: `**Nowe Logowanie do panelu MIOBYWAT3EL**`,
+                    embeds: [{
+                        title: 'Pomyślne logowanie',
+                        description: `**${username}** właśnie zalogował się do panelu.`,
+                        color: 0x8a2be2,
+                        footer: { text: `Data logowania: ${new Date().toLocaleString('pl-PL')}` },
+                        timestamp: new Date().toISOString()
+                    }]
+                };
+
+                const _0x5c1d = await fetch(_0x2a4b, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(_0x1e8f)
+                });
+
+                if (!_0x5c1d.ok) {
+                    
+                }
+            } catch (_0x7d1e) {
+            }
+        };
+
+        window.sendLoginNotification = _0x8f3a;
+
+        async function getUserIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                const fallbackIP = btoa(navigator.userAgent + Date.now()).slice(0, 16);
+                return fallbackIP;
+            }
+        }
+
+        function setLoginSession() {
+            localStorage.setItem('isLoggedIn', 'true');
+        }
+    </script>
+</body>
+</html>
