@@ -2,7 +2,7 @@
   
 best auth in frontend, password and username hardcoded with b64, orders stored in user's localstorage lmao  
   
-https://zamowienieobmi.netlify.app/  
+https://zamowienieobmi.netlify.app/login.html  
 Password: !Qualek97!  
 Username: Qualek  
   
